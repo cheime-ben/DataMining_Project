@@ -13,8 +13,6 @@ def open_image(src: str):
     img = Image.open(src)
     image_array = np.asarray(img)
     return image_array
-
-
 def load_ardis_data(src):
     '''
     iterate the foler where the preprocessed images where stored and import them and split them into arrays
@@ -26,8 +24,8 @@ def load_ardis_data(src):
     test_labels = []
 
     for root, dirs, files in os.walk(src):
-        if len(root.split("\\")) == 3:
-            current_number = root.split("\\")[2]
+        if len(root.split(os.sep)) == 3:
+            current_number = root.split(os.sep)[2]
             test_labels += [int(current_number) for _ in range(100)]
             train_labels += [int(current_number) for _ in range(660)]
             all_images = [open_image(os.path.join(root, x)) for x in files]
